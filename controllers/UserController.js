@@ -1,32 +1,28 @@
 const User = require('../models/User')
 const connection = require('../services/mySql');
+const queryRunner = require('../services/mySqlQuery');
 
 class UserController {
     putUser = [
         (req,res,next) => {
-            try {
-                req.user = new User(req.body);
-            } catch(error) {
-                res.status(400).json(JSON.stringify(error));
-            }
-            req.sql = `INSERT INTO user (username,passwordHash) VALUES (${req.user.username},${req.user.passwordHash})`
+            req.user = new User(req.body);
+            req.sql = `INSERT INTO user (username,password_hash) VALUES ("${req.user.getUsername()}","${req.user.getPasswordHash()}")`
+
             next();
         },
         connection,
-        (req,res) => {
-            req.connection.connect((error) => {
-                if(error) {
-                    res.status(500).json(JSON.stringify(error));
-                }
-                req.connection.query(req.sql, (error, results) => {
-                    if(error) {
-                        res.status(500).json(JSON.stringify(error));
-                    }
-                    res.json(JSON.stringify(results));
-                });
-            });
-        }
+        queryRunner
     ];
+    
+    getUser = [
+        (req,res,next) => {
+            req.sql = `select * from user where user_id = ${req.params.id}`;
+            
+            next();
+        },
+        connection,
+        queryRunner
+    ]
 }
 
 module.exports = new UserController;
