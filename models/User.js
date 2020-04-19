@@ -1,7 +1,8 @@
 class User{
     constructor(options) {
+        this.id = options.user_id;
         this.username = options.username;
-        this.passwordHash = options.passwordHash;
+        this.passwordHash = options.password_hash || options.passwordHash;
     }
 
     setId(id) {
@@ -28,3 +29,5 @@ class User{
         return this.passwordHash;
     }
 }
+
+module.exports = User;
