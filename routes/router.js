@@ -8,3 +8,5 @@ router.post('/user/put',UserController.putUser);
 router.get('/user/:id',UserController.getUser);
 router.post("/auth",connSql,tokenAuthentication.authenticateUser)
 router.get("/logout",tokenAuthentication.verifyJWT,tokenAuthentication.clearToken)
+
+module.exports = router;
