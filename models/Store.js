@@ -25,8 +25,6 @@ class Store{
         return `INSERT INTO store(user_id,name) VALUES(${this.user_id},'${this.name}')`
     }
 
-
-
 }
 
 module.exports = Store

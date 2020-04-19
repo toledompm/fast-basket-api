@@ -6,7 +6,7 @@ const tokenAuthentication = require('../services/tokenAuthentication');
 const connSql = require('../services/mySql')
 const smsValidator = require('../services/smsValidation');
 
-router.post('/user/put',UserController.putUser);
+router.post('/user',UserController.postUser);
 router.get('/user/:id',UserController.getUser);
 router.post("/auth",connSql,tokenAuthentication.authenticateUser)
 router.get("/logout",tokenAuthentication.verifyJWT,tokenAuthentication.clearToken)
