@@ -15,4 +15,3 @@ router.get("/logout",tokenAuthentication.verifyJWT,tokenAuthentication.clearToke
 router.post("/sms",connSql,smsValidator.sendSMS)
 router.post("/validadeSMS",connSql,smsValidator.validateNumber)
 
-module.exports = router;
