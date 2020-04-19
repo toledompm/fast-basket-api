@@ -18,6 +18,8 @@ function sendSMS(req,res){
 
     const setSMSTypePromise = new AWS.SNS({apiVersion: '2010-03-31'});
     setSMSTypePromise.publish(params).promise()
+
+    return res.json({status:200})
 }
 
 function validateNumber(req,res) {
@@ -38,7 +40,6 @@ function validateNumber(req,res) {
         }
         else{
             return res.json({validated:false})
-
         }
     })
 
