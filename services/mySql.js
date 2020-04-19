@@ -1,4 +1,6 @@
 const mysql = require('mysql');
+const dotenv = require('dotenv');
+dotenv.config();
 
 module.exports = (req,res,next) => {
     req.connection = mysql.createConnection({

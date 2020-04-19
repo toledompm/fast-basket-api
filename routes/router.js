@@ -5,9 +5,6 @@ const tokenAuthentication = require('../services/tokenAuthentication');
 const connSql = require('../services/mySql')
 
 router.post('/user/put',UserController.putUser);
-
-//Rotas para autenticação e logout do sistema
+router.get('/user/:id',UserController.getUser);
 router.post("/auth",connSql,tokenAuthentication.authenticateUser)
 router.get("/logout",tokenAuthentication.verifyJWT,tokenAuthentication.clearToken)
-
-module.exports = router;
