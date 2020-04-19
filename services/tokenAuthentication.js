@@ -10,6 +10,7 @@ function authenticateUser(req,res) {
         if(!err){
 
             const token = jwt.sign({id:rows[0].user_id},env.parsed.JWT_KEY)
+            req.header['x-access-token'] = token
             return res.status(200).json({auth:true,result:token})
         }
         else{
@@ -23,7 +24,7 @@ function clearToken(req,res) {
     res.status(200).json({auth:false,result:null})
 }
 
-function verifyJWT(req,res){
+function verifyJWT(req,res,next){
     const token = req.header['x-access-token']
     if(!token){
         return res.status(401).send({auth:false,Message:"No token seted"})

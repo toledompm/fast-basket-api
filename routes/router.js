@@ -16,8 +16,8 @@ router.post("/sms",connSql,smsValidator.sendSMS)
 router.post("/validadeSMS",connSql,smsValidator.validateNumber)
 
 //Rotas store
-router.get("/store",connSql,storeController.index)
-router.post("/store",connSql,storeController.setStore)
+router.get("/store",connSql,tokenAuthentication.verifyJWT,storeController.index)
+router.post("/store",connSql,tokenAuthentication.verifyJWT,storeController.setStore)
 
 module.exports = router;
 
